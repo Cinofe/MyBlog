@@ -71,8 +71,8 @@ sx={{"width": "5em"}}/></Square>
 {`Footer Area`}</Text></Center></Square>
 <NextHead>
 <title>{`Pynecone App`}</title>
-<meta content="A Pynecone app."
-name="description"/>
+<meta name="description"
+content="A Pynecone app."/>
 <meta property="og:image"
 content="favicon.ico"/></NextHead></VStack>
 )

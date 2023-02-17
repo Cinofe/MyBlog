@@ -1,8 +1,9 @@
-import pynecone as pc
-from Modules.Head import head
 from Modules.State import drawerState
+from Modules.Head import head
 from Modules.Body import body
 from Modules.Fotter import fotter
+import pynecone as pc
+
 
 class MyBlog():
     def __init__(self):

@@ -2,7 +2,7 @@ import {useEffect, useRef, useState} from "react"
 import {useRouter} from "next/router"
 import {E, connect, updateState} from "/utils/state"
 import "focus-visible/dist/focus-visible"
-import {Box, Button, Drawer, DrawerBody, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Text, VStack} from "@chakra-ui/react"
+import {Button, Center, Drawer, DrawerBody, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Heading, Image, Spacer, Square, Text, VStack} from "@chakra-ui/react"
 import NextHead from "next/head"
 
 const EVENT = "ws://localhost:8000/event"
@@ -39,17 +39,17 @@ useEffect(() => {
   update()
 })
 return (
-<VStack>
-<Box>
-<Text>
-{`1`}</Text></Box>
-<Box>
-<Text>
-{`2`}</Text></Box>
-<Box>
-<Text>
-{`3`}</Text></Box>
-<Box>
+<VStack sx={{"width": "100%", "height": "85vh"}}>
+<Flex sx={{"width": "100%", "height": "15vh"}}>
+<Square sx={{"padding": 10}}>
+<Image src="/logo.png"
+sx={{"width": "5em"}}/></Square>
+<Spacer/>
+<Square sx={{"padding": 10}}>
+<Heading>
+{`My Blog`}</Heading></Square>
+<Spacer/>
+<Square sx={{"padding": 10}}>
 <Button onClick={() => Event([E("drawer_state.right", {})])}>
 {`Show Right Drawer`}</Button>
 <Drawer isOpen={drawer_state.show_right}
@@ -60,12 +60,21 @@ onOverlayClick={() => Event([E("drawer_state.close", {})])}>
 {`Confirm`}</DrawerHeader>
 <DrawerBody>
 {`Do you want to confirm example?`}</DrawerBody>
-<DrawerFooter/></DrawerContent></DrawerOverlay></Drawer></Box>
+<DrawerFooter/></DrawerContent></DrawerOverlay></Drawer></Square></Flex>
+<Center>
+<Text>
+{`1`}</Text></Center>
+<Center>
+<Text>
+{`2`}</Text></Center>
+<Center>
+<Text>
+{`3`}</Text></Center>
 <NextHead>
 <title>{`Pynecone App`}</title>
 <meta content="A Pynecone app."
 name="description"/>
-<meta property="og:image"
-content="favicon.ico"/></NextHead></VStack>
+<meta content="favicon.ico"
+property="og:image"/></NextHead></VStack>
 )
 }

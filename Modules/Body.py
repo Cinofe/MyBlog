@@ -2,7 +2,7 @@
     Body 구성을 위한 모듈
 """
 import pynecone as pc
-from Modules.Banner import banner
+from Modules.Head import head
 from Modules.Fotter import fotter
 
 class body:
@@ -19,6 +19,6 @@ class body:
                 pc.text("Body Area"),
             ),
             width = str(self.width) + "%",
-            height = str(self.height + banner().height + fotter().height) + "vh",
+            height = str(self.height + head().height + fotter().height) + "vh",
             bg = "yellow",
         )

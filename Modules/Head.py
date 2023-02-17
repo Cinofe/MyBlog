@@ -4,13 +4,13 @@
 import pynecone as pc
 from Modules.Drawer import drawer
 
-class banner():
+class head:
     def __init__(self):
         self.height = 15    
         self.width = 100
         self.Dw = drawer()
     
-    def banner(self):
+    def head(self):
         return pc.flex(
             pc.square(
                 pc.image(src="/logo.png", width="5em"),

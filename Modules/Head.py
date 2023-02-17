@@ -1,14 +1,13 @@
 """
     Banner 구성을 위한 모듈
 """
-import pynecone as pc
 from Modules.Drawer import drawer
+import pynecone as pc
 
 class head:
     def __init__(self):
         self.height = 15    
         self.width = 100
-        self.Dw = drawer()
     
     def head(self):
         return pc.flex(
@@ -22,7 +21,7 @@ class head:
                 padding=10,
             ),
             pc.spacer(),
-            self.Dw.drawer(),
+            drawer().drawer(),
             width = str(self.width) + "%",
             height = str(self.height) + "vh",
         )

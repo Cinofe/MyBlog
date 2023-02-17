@@ -1,27 +1,24 @@
 import pynecone as pc
 from Modules.Banner import banner
-from Modules.DrawerState import drawerState
+from Modules.State import drawerState
+from Modules.Body import body
+from Modules.Fotter import fotter
+
 
 class MyBlog():
     def __init__(self):
         self.Ban = banner()
+        self.body = body()
+        self.fotter = fotter()
         self.width = 100
         self.height = 100
 
     def index(self):
         return pc.vstack(
             self.Ban.banner(),
-            pc.center(
-                pc.text("1"),
-            ),
-            pc.center(
-                pc.text("2"),
-            ),
-            pc.center(
-                pc.text("3"),
-            ),
+            self.body.body(),
+            self.fotter.footer(),
             width = str(self.width) + "%",
-            height = str(self.height - self.Ban.height) + 'vh',
         )
         
 # Add state and page to the app.

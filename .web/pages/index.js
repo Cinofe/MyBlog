@@ -3,6 +3,7 @@ import {useRouter} from "next/router"
 import {E, connect, updateState} from "/utils/state"
 import "focus-visible/dist/focus-visible"
 import {Button, Center, Drawer, DrawerBody, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Heading, Image, Spacer, Square, Text, VStack} from "@chakra-ui/react"
+import {HamburgerIcon} from "@chakra-ui/icons"
 import NextHead from "next/head"
 
 const EVENT = "ws://localhost:8000/event"
@@ -39,7 +40,7 @@ useEffect(() => {
   update()
 })
 return (
-<VStack sx={{"width": "100%", "height": "85vh"}}>
+<VStack sx={{"width": "100%"}}>
 <Flex sx={{"width": "100%", "height": "15vh"}}>
 <Square sx={{"padding": 10}}>
 <Image src="/logo.png"
@@ -50,30 +51,28 @@ sx={{"width": "5em"}}/></Square>
 {`My Blog`}</Heading></Square>
 <Spacer/>
 <Square sx={{"padding": 10}}>
-<Button onClick={() => Event([E("drawer_state.right", {})])}>
-{`Show Right Drawer`}</Button>
-<Drawer isOpen={drawer_state.show_right}
-onOverlayClick={() => Event([E("drawer_state.close", {})])}>
+<Button onMouseOver={() => Event([E("drawer_state.right", {})])}>
+<HamburgerIcon/></Button>
+<Drawer isOpen={drawer_state.show_right}>
 <DrawerOverlay>
-<DrawerContent>
+<DrawerContent onMouseLeave={() => Event([E("drawer_state.close", {})])}>
 <DrawerHeader>
 {`Confirm`}</DrawerHeader>
 <DrawerBody>
 {`Do you want to confirm example?`}</DrawerBody>
 <DrawerFooter/></DrawerContent></DrawerOverlay></Drawer></Square></Flex>
+<Square sx={{"width": "75%", "height": "135vh", "bg": "yellow"}}>
 <Center>
 <Text>
-{`1`}</Text></Center>
+{`Body Area`}</Text></Center></Square>
+<Square sx={{"width": "100%", "height": "20vh"}}>
 <Center>
 <Text>
-{`2`}</Text></Center>
-<Center>
-<Text>
-{`3`}</Text></Center>
+{`Footer Area`}</Text></Center></Square>
 <NextHead>
 <title>{`Pynecone App`}</title>
-<meta name="description"
-content="A Pynecone app."/>
+<meta content="A Pynecone app."
+name="description"/>
 <meta property="og:image"
 content="favicon.ico"/></NextHead></VStack>
 )

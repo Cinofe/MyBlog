@@ -1,5 +1,8 @@
+"""
+    Drawer 구성을 위한 모듈
+"""
 import pynecone as pc
-from Modules.DrawerState import drawerState
+from Modules.State import drawerState
 
 class drawer():
     def __init__(self):
@@ -8,7 +11,8 @@ class drawer():
     def drawer(self):
         return pc.square(
                 pc.button(
-                    "Show Right Drawer", on_click=drawerState.right
+                    pc.icon(tag = "HamburgerIcon"),
+                    on_mouse_over=drawerState.right,
                 ),
                 pc.drawer(
                     pc.drawer_overlay(
@@ -17,11 +21,11 @@ class drawer():
                             pc.drawer_body(
                                 "Do you want to confirm example?"
                             ),
-                            pc.drawer_footer()
-                        )
+                            pc.drawer_footer(),
+                            on_mouse_leave = drawerState.close,
+                        ),
                     ),
                     is_open=drawerState.show_right,
-                    on_overlay_click=drawerState.close
                 ),
                 padding=self.padding,
             )

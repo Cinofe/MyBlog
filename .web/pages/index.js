@@ -72,9 +72,9 @@ onOverlayClick={() => Event([E("drawer_state.close", {})])}>
 {`3`}</Text></Center>
 <NextHead>
 <title>{`Pynecone App`}</title>
-<meta content="A Pynecone app."
-name="description"/>
-<meta content="favicon.ico"
-property="og:image"/></NextHead></VStack>
+<meta name="description"
+content="A Pynecone app."/>
+<meta property="og:image"
+content="favicon.ico"/></NextHead></VStack>
 )
 }

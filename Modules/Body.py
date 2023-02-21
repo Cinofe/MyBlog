@@ -17,8 +17,9 @@ class body:
         return pc.square(
             pc.center(
                 pc.text("Body Area"),
-            ),
-            width = str(self.width) + "%",
-            height = str(self.height + head().height + fotter().height) + "vh",
-            bg = "yellow",
-        )
+                width = str(self.width) + "%",
+                height = str(self.height + head().height + fotter().height) + "vh",
+                bg = "yellow",
+                padding = 10,
+            )
+        ),

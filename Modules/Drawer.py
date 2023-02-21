@@ -11,8 +11,9 @@ class drawer():
     def drawer(self):
         return pc.square(
                 pc.button(
-                    pc.icon(tag = "HamburgerIcon"),
-                    on_mouse_over=drawerState.right,
+                    pc.icon(tag = "HamburgerIcon", width="1.5em",height="1.5em"),
+                    on_click=drawerState.right,
+                    width = "5em",
                 ),
                 pc.drawer(
                     pc.drawer_overlay(
@@ -22,7 +23,7 @@ class drawer():
                                 "Do you want to confirm example?"
                             ),
                             pc.drawer_footer(),
-                            on_mouse_leave = drawerState.close,
+                            on_click = drawerState.close,
                         ),
                     ),
                     is_open=drawerState.show_right,

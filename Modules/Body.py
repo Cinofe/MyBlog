@@ -4,7 +4,7 @@
 import pynecone as pc
 from Modules.State import state
 from Modules.Head import head
-from Modules.Fotter import fotter
+from Modules.Footer import footer
 
 class body:
     def __init__(self):
@@ -16,7 +16,7 @@ class body:
             pc.center(
                 pc.text("Body Area"),
                 width = str(self.width)+"vw",
-                height = str(self.height + head().height + fotter().height) + "vh",
+                height = str(self.height + head().height + footer().height) + "vh",
                 bg = "yellow",
                 padding = 10,
             ),

@@ -3,7 +3,7 @@ import {useRouter} from "next/router"
 import {E, connect, updateState} from "/utils/state"
 import "focus-visible/dist/focus-visible"
 import {Button, Center, Drawer, DrawerBody, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, HStack, Heading, Image, Input, Spacer, Square, Text, VStack} from "@chakra-ui/react"
-import {CloseIcon, HamburgerIcon} from "@chakra-ui/icons"
+import {CloseIcon} from "@chakra-ui/icons"
 import NextHead from "next/head"
 
 const EVENT = "ws://localhost:8000/event"
@@ -42,18 +42,22 @@ useEffect(() => {
 return (
 <VStack sx={{"width": "100%"}}>
 <Flex sx={{"width": "100%", "height": "15vh"}}>
-<Square sx={{"padding": 10}}>
+<Square>
+<Center sx={{"padding": 10}}>
 <Image src="/logo.png"
-sx={{"width": "5em"}}/></Square>
+sx={{"width": "5em"}}/></Center></Square>
 <Spacer/>
-<Square sx={{"padding": 10}}>
+<Square>
+<Center sx={{"padding": 10}}>
 <Heading>
-{`My Blog`}</Heading></Square>
+{`My Blog`}</Heading></Center></Square>
 <Spacer/>
-<Square sx={{"padding": 10}}>
+<Square>
+<Center sx={{"padding": 10}}>
 <Button onClick={() => Event([E("state.show_drawer", {})])}
-sx={{"width": "5vw", "bg": "lightgray"}}>
-<HamburgerIcon sx={{"width": "1.5em", "height": "1.5em"}}/></Button>
+sx={{"width": "3em", "height": "3em", "padding": 0, "borderRadius": "3em", "_hover": {"bg": "lightgray"}}}>
+<Image src="/person.png"
+sx={{"width": "2em"}}/></Button>
 <Drawer isOpen={state.show_signIn}>
 <DrawerOverlay>
 <DrawerContent>
@@ -64,12 +68,12 @@ sx={{"width": "5vw", "bg": "lightgray"}}>
 {`Sign in`}</Center></DrawerHeader>
 <DrawerBody>
 <VStack>
-<Input type="text"
-placeholder="ID"
+<Input placeholder="ID"
+type="text"
 onChange={(_e) => Event([E("state.set_id", {id:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input type="password"
-placeholder="PW"
+<Input placeholder="PW"
+type="password"
 onChange={(_e) => Event([E("state.set_pw", {pw:_e.target.value})])}
 sx={{"width": "15em"}}/>
 <Center>
@@ -91,15 +95,19 @@ sx={{"width": "7em"}}>
 <HStack justifyContent="right">
 <CloseIcon onClick={() => Event([E("state.close_user_drawer", {})])}/></HStack>
 <Center>
-{`Signed`}</Center></DrawerHeader></DrawerContent></DrawerOverlay></Drawer>
+{`Signed`}</Center></DrawerHeader>
+<DrawerBody/>
+<DrawerFooter/></DrawerContent></DrawerOverlay></Drawer>
 <Drawer isOpen={state.show_signUp}>
 <DrawerOverlay>
 <DrawerContent>
-<DrawerHeader sx={{"justifyContent": "right"}}>
-<HStack>
-<CloseIcon onClick={() => Event([E("state.close_signUp_drawer", {})])}/></HStack></DrawerHeader>
+<DrawerHeader>
+<HStack justifyContent="right">
+<CloseIcon onClick={() => Event([E("state.close_signUp_drawer", {})])}/></HStack>
 <Center>
-{`Sign up`}</Center></DrawerContent></DrawerOverlay></Drawer></Square></Flex>
+{`Sign up`}</Center></DrawerHeader>
+<DrawerBody/>
+<DrawerFooter/></DrawerContent></DrawerOverlay></Drawer></Center></Square></Flex>
 <Square>
 <Center sx={{"width": "75vw", "height": "135vh", "bg": "yellow", "padding": 10}}>
 <Text>
@@ -110,8 +118,8 @@ sx={{"width": "7em"}}>
 {`Footer Area`}</Text></Center></Square>
 <NextHead>
 <title>{`Pynecone App`}</title>
-<meta content="A Pynecone app."
-name="description"/>
+<meta name="description"
+content="A Pynecone app."/>
 <meta property="og:image"
 content="favicon.ico"/></NextHead></VStack>
 )

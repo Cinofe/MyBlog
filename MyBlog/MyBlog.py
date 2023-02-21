@@ -1,7 +1,7 @@
 from Modules.State import state
 from Modules.Head import head
 from Modules.Body import body
-from Modules.Fotter import fotter
+from Modules.Footer import footer
 import pynecone as pc
 
 class MyBlog():
@@ -13,7 +13,7 @@ class MyBlog():
         return pc.vstack(
             head().head(),
             body().body(),
-            fotter().footer(),
+            footer().footer(),
             width = str(self.width) + "%",
         )
         

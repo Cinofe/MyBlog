@@ -4,7 +4,7 @@
 
 import pynecone as pc
 
-class fotter:
+class footer:
     def __init__(self):
         self.width = 100
         self.height = 20

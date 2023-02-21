@@ -1,7 +1,7 @@
 """
     Banner 구성을 위한 모듈
 """
-from Modules.Drawer import drawer
+from Modules.Menu import menu
 import pynecone as pc
 
 class head:
@@ -12,16 +12,20 @@ class head:
     def head(self):
         return pc.flex(
             pc.square(
-                pc.image(src="/logo.png", width="5em"),
-                padding=10,
+                pc.center(
+                    pc.image(src="/logo.png", width="5em"),
+                    padding=10,
+                )
             ),
             pc.spacer(),
             pc.square(
-                pc.heading("My Blog"),
-                padding=10,
+                pc.center(
+                    pc.heading("My Blog"),
+                    padding=10,
+                )
             ),
             pc.spacer(),
-            drawer().drawer(),
+            menu().menu(),
             width = str(self.width) + "%",
             height = str(self.height) + "vh",
         )

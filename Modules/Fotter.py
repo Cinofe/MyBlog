@@ -12,8 +12,9 @@ class fotter:
     def footer(self):
         return pc.square(
             pc.center(
-                pc.text("Footer Area"),
+                pc.text("Footer Area",font_size="2em",color="yellow"),
             ),
             width = str(self.width) + "%",
             height = str(self.height) + "vh",
+            bg = "blue",
         )

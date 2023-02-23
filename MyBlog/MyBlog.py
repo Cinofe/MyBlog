@@ -1,7 +1,7 @@
-from Modules.State import state
-from Modules.Head import head
-from Modules.Body import body
-from Modules.Footer import footer
+from Modules.States.State import state
+from Modules.MainModule.Head import head
+from Modules.MainModule.Body import body
+from Modules.MainModule.Footer import footer
 import pynecone as pc
 
 class MyBlog():

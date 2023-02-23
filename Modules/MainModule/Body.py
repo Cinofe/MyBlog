@@ -2,9 +2,9 @@
     Body 구성을 위한 모듈
 """
 import pynecone as pc
-from Modules.State import state
-from Modules.Head import head
-from Modules.Footer import footer
+from Modules.States.State import state
+from .Head import head
+from .Footer import footer
 
 class body:
     def __init__(self):
@@ -19,5 +19,5 @@ class body:
                 height = str(self.height + head().height + footer().height) + "vh",
                 bg = "yellow",
                 padding = 10,
-            ),
+            )
         )

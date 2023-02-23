@@ -1,7 +1,8 @@
 """
     Banner 구성을 위한 모듈
 """
-from Modules.Menu import menu
+from Modules.States.State import state
+from Modules.FrameModule.Menu import menu
 import pynecone as pc
 
 class head:
@@ -13,7 +14,10 @@ class head:
         return pc.flex(
             pc.square(
                 pc.center(
-                    pc.image(src="/logo.png", width="5em"),
+                    pc.image(
+                        src="/logo.png",
+                        width="5em",
+                    ),
                     padding=10,
                 )
             ),

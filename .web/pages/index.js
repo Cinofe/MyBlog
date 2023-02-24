@@ -70,12 +70,12 @@ sx={{"width": "0.8em", "height": "0.8em"}}/></Square></HStack>
 {`Sign in`}</Center></DrawerHeader>
 <DrawerBody>
 <VStack>
-<Input placeholder="ID"
-type="text"
+<Input type="text"
+placeholder="ID"
 onBlur={(_e) => Event([E("state.sign_in_state.set_user_id", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input placeholder="Password"
-type="password"
+<Input type="password"
+placeholder="Password"
 onBlur={(_e) => Event([E("state.sign_in_state.set_password", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
 <Center>
@@ -116,24 +116,24 @@ sx={{"width": "0.8em", "height": "0.8em"}}/></Square></HStack>
 <Center>
 {`Sign up`}</Center></DrawerHeader>
 <VStack>
-<Input placeholder="ID"
-type="text"
+<Input type="text"
+placeholder="ID"
 onBlur={(_e) => Event([E("state.sign_in_state.set_user_id", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input placeholder="Username"
-type="text"
+<Input type="text"
+placeholder="Username"
 onBlur={(_e) => Event([E("state.sign_in_state.set_username", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input placeholder="email"
-type="text"
+<Input type="text"
+placeholder="email"
 onBlur={(_e) => Event([E("state.sign_in_state.set_email", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input placeholder="Password"
-type="password"
+<Input type="password"
+placeholder="Password"
 onBlur={(_e) => Event([E("state.sign_in_state.set_password", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input placeholder="Confirm Password"
-type="password"
+<Input type="password"
+placeholder="Confirm Password"
 onBlur={(_e) => Event([E("state.sign_in_state.set_confirm_password", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
 <Center>

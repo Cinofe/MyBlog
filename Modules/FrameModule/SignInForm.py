@@ -36,29 +36,34 @@ class signInForm:
     def signUp():
         return pc.vstack(
             pc.input(
+                value = signInState.user_id,
                 placeholder="ID",
-                on_blur=signInState.set_user_id,
+                on_change=signInState.set_user_id,
                 width="15em"
             ),
             pc.input(
+                value = signInState.username,
                 placeholder="Username",
-                on_blur=signInState.set_username,
+                on_change=signInState.set_username,
                 width="15em"
             ),
             pc.input(
+                value = signInState.email,
                 placeholder="email",
-                on_blur=signInState.set_email,
+                on_change=signInState.set_email,
                 width="15em"
             ),
             pc.input(
+                value = signInState.password,
                 placeholder="Password",
-                on_blur=signInState.set_password,
+                on_change=signInState.set_password,
                 width="15em",
                 type_="password"
             ),
             pc.input(
+                value = signInState.confirm_password,
                 placeholder="Confirm Password",
-                on_blur=signInState.set_confirm_password,
+                on_change=signInState.set_confirm_password,
                 width="15em",
                 type_="password"
             ),

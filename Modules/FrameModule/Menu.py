@@ -13,7 +13,7 @@ class menu():
     def CloseIcon(self, event):
         return pc.square(
             pc.icon(
-                tag="CloseIcon",
+                tag="close",
                 on_click=event,
                 width='0.8em',
                 height='0.8em'

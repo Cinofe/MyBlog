@@ -6,19 +6,17 @@ from .State import state, Users
 import pynecone as pc
 
 class signInState(state):
-    user_id : str
-    username : str
-    email : str
-    password : str
-    confirm_password : str
+    user_id : str = ""
+    username : str = ""
+    email : str = ""
+    password : str = ""
+    confirm_password : str = ""
 
     def signIn(self):
         with pc.session() as session:
             pass
         print(f"id : {self.user_id}, pw : {self.password}")
-
-    ## 원하는대로 작동 안함.
-    # alert 띄우지 말고 drawer닫고 다시 띄우기?
+    
     def signUp(self):
         with pc.session() as session:
             print('signUp Clicked')
@@ -26,6 +24,8 @@ class signInState(state):
                 return pc.window_alert("Please fill the all empty.")
 
             if self.password != self.confirm_password:
+                self.password = ""
+                self.confirm_password = ""
                 return pc.window_alert("Password do not match.")
 
             if session.exec(Users.select.where(Users.user_id == self.user_id)).first():
@@ -33,7 +33,7 @@ class signInState(state):
 
             if session.exec(Users.select.where(Users.email == self.email)).first():
                 return pc.window_alert("The Email is already exists.")
-                
+
             if session.exec(Users.select.where(Users.username == self.username)).first():
                 return pc.window_alert("The username is already exists.")
             
@@ -48,13 +48,13 @@ class signInState(state):
     def goSignUp(self):
         self.show_signIn = False
         self.show_user = False
-        self.show_signUp = not (self.show_signUp)
+        self.show_signUp = True
     
     def cancelSignUp(self):
         self.show_signUp = False
         self.show_user = False
-        self.show_signIn = not (self.show_signIn)
-    
+        self.show_signIn = True
+
     def successSignUp(self):
         self.show_signIn = False
         self.show_signUp = False

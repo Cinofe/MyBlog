@@ -1,4 +1,5 @@
 // State management for Pynecone web apps.
+import io from 'socket.io-client';
 
 // Global variable to hold the token.
 let token;
@@ -67,82 +68,102 @@ export const applyDelta = (state, delta) => {
  * @param event The event to send.
  * @param router The router object.
  * @param socket The socket object to send the event on.
+ *
+ * @returns True if the event was sent, false if it was handled locally.
  */
 export const applyEvent = async (event, router, socket) => {
   // Handle special events
   if (event.name == "_redirect") {
     router.push(event.payload.path);
-    return;
+    return false;
   }
 
   if (event.name == "_console") {
     console.log(event.payload.message);
-    return;
+    return false;
   }
 
   if (event.name == "_alert") {
     alert(event.payload.message);
-    return;
+    return false;
   }
 
   // Send the event to the server.
   event.token = getToken();
   event.router_data = (({ pathname, query }) => ({ pathname, query }))(router);
   if (socket) {
-    socket.send(JSON.stringify(event));
+    socket.emit("event", JSON.stringify(event));
+    return true;
   }
+
+  return false;
 };
 
 /**
  * Process an event off the event queue.
  * @param state The state with the event queue.
+ * @param setState The function to set the state.
  * @param result The current result
  * @param setResult The function to set the result.
  * @param router The router object.
  * @param socket The socket object to send the event on.
  */
-export const updateState = async (state, result, setResult, router, socket) => {
+export const updateState = async (state, setState, result, setResult, router, socket) => {
   // If we are already processing an event, or there are no events to process, return.
   if (result.processing || state.events.length == 0) {
     return;
   }
 
-  // If the socket is not ready, return.
-  if (!socket.readyState) {
-    return;
-  }
-
-  // Process the next event in the queue.
+  // Set processing to true to block other events from being processed.
   setResult({ ...result, processing: true });
-  await applyEvent(state.events.shift(), router, socket);
+
+  // Pop the next event off the queue and apply it.
+  const event = state.events.shift()
+
+  // Set new events to avoid reprocessing the same event.
+  setState({ ...state, events: state.events });
+
+  // Apply the event.
+  const eventSent = await applyEvent(event, router, socket);
+  if (!eventSent) {
+    // If no event was sent, set processing to false and return.
+    setResult({...state, processing: false})
+  }
 };
 
 /**
  * Connect to a websocket and set the handlers.
  * @param socket The socket object to connect.
  * @param state The state object to apply the deltas to.
+ * @param setState The function to set the state.
  * @param setResult The function to set the result.
  * @param endpoint The endpoint to connect to.
  */
-export const connect = async (socket, state, result, setResult, router, endpoint) => {
+export const connect = async (socket, state, setState, result, setResult, router, endpoint, transports) => {
+  // Get backend URL object from the endpoint
+  const endpoint_url = new URL(endpoint)
   // Create the socket.
-  socket.current = new WebSocket(endpoint);
+  socket.current = io(endpoint, {
+    path: endpoint_url['pathname'],
+    transports: transports,
+    autoUnref: false,
+  });
 
   // Once the socket is open, hydrate the page.
-  socket.current.onopen = () => {
-    updateState(state, result, setResult, router, socket.current)
-  }
+  socket.current.on('connect', () => {
+    updateState(state, setState, result, setResult, router, socket.current);
+  });
 
   // On each received message, apply the delta and set the result.
-  socket.current.onmessage = function (update) {
-    update = JSON.parse(update.data);
+  socket.current.on('event', function (update) {
+    update = JSON.parse(update);
     applyDelta(state, update.delta);
     setResult({
       processing: false,
       state: state,
       events: update.events,
     });
-  };
+  });
 };
 
 /**

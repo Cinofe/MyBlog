@@ -70,12 +70,12 @@ sx={{"width": "0.8em", "height": "0.8em"}}/></Square></HStack>
 {`Sign in`}</Center></DrawerHeader>
 <DrawerBody>
 <VStack>
-<Input type="text"
-placeholder="ID"
+<Input placeholder="ID"
+type="text"
 onBlur={(_e) => Event([E("state.sign_in_state.set_user_id", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input type="password"
-placeholder="Password"
+<Input placeholder="Password"
+type="password"
 onBlur={(_e) => Event([E("state.sign_in_state.set_password", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
 <Center>
@@ -100,7 +100,10 @@ sx={{"width": "7em"}}>
 sx={{"width": "0.8em", "height": "0.8em"}}/></Square></HStack>
 <Center>
 {`Signed`}</Center></DrawerHeader>
-<DrawerBody/>
+<DrawerBody>
+<Center>
+<Button onClick={() => Event([E("state.signOut", {})])}>
+{`Sign out`}</Button></Center></DrawerBody>
 <DrawerFooter/></DrawerContent></DrawerOverlay></Drawer>
 <Drawer isOpen={state.show_signUp}>
 <DrawerOverlay>
@@ -113,24 +116,24 @@ sx={{"width": "0.8em", "height": "0.8em"}}/></Square></HStack>
 <Center>
 {`Sign up`}</Center></DrawerHeader>
 <VStack>
-<Input type="text"
-placeholder="ID"
+<Input placeholder="ID"
+type="text"
 onBlur={(_e) => Event([E("state.sign_in_state.set_user_id", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input type="text"
-placeholder="Username"
+<Input placeholder="Username"
+type="text"
 onBlur={(_e) => Event([E("state.sign_in_state.set_username", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input type="text"
-placeholder="email"
+<Input placeholder="email"
+type="text"
 onBlur={(_e) => Event([E("state.sign_in_state.set_email", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input type="password"
-placeholder="Password"
+<Input placeholder="Password"
+type="password"
 onBlur={(_e) => Event([E("state.sign_in_state.set_password", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input type="password"
-placeholder="Confirm Password"
+<Input placeholder="Confirm Password"
+type="password"
 onBlur={(_e) => Event([E("state.sign_in_state.set_confirm_password", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
 <Center>
@@ -157,7 +160,7 @@ sx={{"width": "7em"}}>
 <title>{`Pynecone App`}</title>
 <meta name="description"
 content="A Pynecone app."/>
-<meta property="og:image"
-content="favicon.ico"/></NextHead></VStack>
+<meta content="favicon.ico"
+property="og:image"/></NextHead></VStack>
 )
 }

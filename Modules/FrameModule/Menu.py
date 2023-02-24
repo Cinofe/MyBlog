@@ -39,18 +39,6 @@ class menu():
             isOpen = drawerState.show_signIn
         )
 
-    def User_drawer(self):
-        return drawerFrame.drawer(
-            head = pc.drawer_header(
-                pc.hstack(
-                    self.CloseIcon(drawerState.close_user_drawer),
-                    justify_content = "right"
-                ),
-                pc.center("Signed")
-            ),
-            isOpen=drawerState.show_user
-        )
-    
     def signUp_drawer(self):
         return drawerFrame.drawer(
             head = pc.drawer_header(
@@ -62,6 +50,26 @@ class menu():
             ),
             body = signInForm.signUp(),
             isOpen=drawerState.show_signUp
+        )
+
+    def User_drawer(self):
+        return drawerFrame.drawer(
+            head = pc.drawer_header(
+                pc.hstack(
+                    self.CloseIcon(drawerState.close_user_drawer),
+                    justify_content = "right"
+                ),
+                pc.center("Signed")
+            ),
+            body = pc.drawer_body(
+                pc.center(
+                    pc.button(
+                    'Sign out',
+                    on_click=drawerState.signOut
+                    )
+                )
+            ),
+            isOpen=drawerState.show_user
         )
     
     ## 위 함수들은 해당 함수가 실행될 때 실행된 상태에서 state의 is open 값에 의해 실행되어야 함

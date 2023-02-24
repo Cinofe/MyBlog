@@ -19,9 +19,9 @@ class state(pc.State):
     show_signIn: bool = False
     show_user: bool = False
     show_signUp : bool = False
+
+    def signOut(self):
+        self.show_user = False
+        self.Auth = False
+
     
-    ## 데이터베이스 연결 테스트
-    # def testDB(self):
-    #     with pc.session() as session:
-    #         table_names = session.execute('show tables')
-    #         print(*table_names)

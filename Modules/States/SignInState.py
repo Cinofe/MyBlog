@@ -17,30 +17,33 @@ class signInState(state):
             pass
         print(f"id : {self.user_id}, pw : {self.password}")
 
+    ## 원하는대로 작동 안함.
+    # alert 띄우지 말고 drawer닫고 다시 띄우기?
     def signUp(self):
         with pc.session() as session:
             print('signUp Clicked')
             if self.user_id == "" or self.username == "" or self.email == "" or self.password == "" or self.confirm_password == "":
                 return pc.window_alert("Please fill the all empty.")
+
             if self.password != self.confirm_password:
                 return pc.window_alert("Password do not match.")
+
             if session.exec(Users.select.where(Users.user_id == self.user_id)).first():
                 return pc.window_alert("The ID is already exists.")
+
             if session.exec(Users.select.where(Users.email == self.email)).first():
                 return pc.window_alert("The Email is already exists.")
+                
             if session.exec(Users.select.where(Users.username == self.username)).first():
                 return pc.window_alert("The username is already exists.")
+            
             new_user = Users(user_id=self.user_id, username=self.username, email=self.email,passwd=self.password)
 
             session.add(new_user)
             session.commit()
             self.Auth = True
-            pc.window_alert("Successed sign up")
-            return pc.redirect("/")
 
-    def signOut(self):
-        self.reset()
-        state.reset()
+            return self.successSignUp()
 
     def goSignUp(self):
         self.show_signIn = False
@@ -51,3 +54,8 @@ class signInState(state):
         self.show_signUp = False
         self.show_user = False
         self.show_signIn = not (self.show_signIn)
+    
+    def successSignUp(self):
+        self.show_signIn = False
+        self.show_signUp = False
+        self.show_user = False

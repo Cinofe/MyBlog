@@ -10,10 +10,10 @@ def navbar():
     return pc.box(
         pc.hstack(
             pc.hstack(
-                pc.image(src="/logo.png", width="50px"),
+                pc.image(src="/logo.png", width="75px"),
                 pc.heading("My Blog", size="lg"),
                 pc.flex(
-                    pc.badge("2015-2016 Season", color_scheme="blue"),
+                    pc.badge("2022-2023 Season", color_scheme="blue"),
                 ),
             ),
             menu().menu(),
@@ -22,10 +22,9 @@ def navbar():
             padding_x="2em",
             bg="rgba(255,255,255, 0.75)",
         ),
-        position="fixed",
+        position=state.show_navbar,
         width="100%",
         top="0px",
-        z_index="500",
     )
 
 class head:

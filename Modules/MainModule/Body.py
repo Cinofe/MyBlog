@@ -8,7 +8,7 @@ from .Footer import footer
 
 class body:
     def __init__(self):
-        self.width = 75
+        self.width = 80
         self.height = 100
 
     def body(self):
@@ -19,5 +19,7 @@ class body:
                 height = str(self.height + head().height + footer().height) + "vh",
                 bg = "yellow",
                 padding = 10,
-            )
+            ),
+            # on_scroll_up = state.fixNav,
+            # on_scroll_down = state.nonFixNav,
         )

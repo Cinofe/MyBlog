@@ -74,15 +74,18 @@ class menu():
     
     ## 위 함수들은 해당 함수가 실행될 때 실행된 상태에서 state의 is open 값에 의해 실행되어야 함
     def menu(self):
+        """
+            메뉴
+        """
         return pc.square(
             pc.center(
                 pc.button(
                     pc.image(src="/person.png", width="2em"),
                     on_click=drawerState.show_drawer,
-                    width = "3em",
-                    height = "3em",
+                    width = "3.5em",
+                    height = "3.5em",
                     padding = 0,
-                    border_radius = "3em",
+                    border_radius = "4em",
                     _hover={"bg": "lightgray"}
                 ),
                 self.signIn_drawer(),

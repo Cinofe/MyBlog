@@ -7,13 +7,17 @@ import pynecone as pc
 class signInForm:
     def signIn():
         return pc.vstack(
-            pc.input(placeholder="ID",
-                on_blur=signInState.set_user_id,
+            pc.input(
+                value = signInState.user_id,
+                placeholder="ID",
+                on_change=signInState.set_user_id,
                 width="15em",
             ),
-            pc.input(placeholder="Password",
+            pc.input(
+                value = signInState.password,
+                placeholder="Password",
                 type_="password",
-                on_blur=signInState.set_password,
+                on_change=signInState.set_password,
                 width="15em",
             ),
             pc.center(

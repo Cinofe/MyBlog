@@ -8,7 +8,7 @@ import NextHead from "next/head"
 
 const EVENT = "ws://localhost:8000/event"
 export default function Component() {
-const [state, setState] = useState({"Auth": false, "drawer_state": {}, "show_signIn": false, "show_signUp": false, "show_user": false, "sign_in_state": {"confirm_password": "", "email": "", "password": "", "user_id": "", "username": ""}, "events": [{"name": "state.hydrate"}]})
+const [state, setState] = useState({"Auth": false, "drawer_state": {}, "show_navbar": "fixed", "show_signIn": false, "show_signUp": false, "show_user": false, "sign_in_state": {"confirm_password": "", "email": "", "password": "", "user_id": "", "username": ""}, "events": [{"name": "state.hydrate"}]})
 const [result, setResult] = useState({"state": null, "events": [], "processing": false})
 const router = useRouter()
 const socket = useRef(null)
@@ -42,24 +42,26 @@ useEffect(() => {
   update()
 })
 return (
-<VStack sx={{"width": "100%"}}><Flex sx={{"width": "100%", "height": "15vh"}}><Box sx={{"position": "fixed", "width": "100%", "top": "0px", "zIndex": "500"}}><HStack justify="space-between"
+<VStack sx={{"width": "100%"}}><Flex sx={{"width": "100%", "height": "15vh"}}><Box sx={{"position": state.show_navbar, "width": "100%", "top": "0px"}}><HStack justify="space-between"
 sx={{"borderBottom": "0.2em solid #F0F0F0", "paddingX": "2em", "bg": "rgba(255,255,255, 0.75)"}}><HStack><Image src="/logo.png"
-sx={{"width": "50px"}}/>
+sx={{"width": "75px"}}/>
 <Heading size="lg">{`My Blog`}</Heading>
-<Flex><Badge colorScheme="blue">{`2015-2016 Season`}</Badge></Flex></HStack>
+<Flex><Badge colorScheme="blue">{`2022-2023 Season`}</Badge></Flex></HStack>
 <Square><Center sx={{"padding": 10}}><Button onClick={() => Event([E("state.drawer_state.show_drawer", {})])}
-sx={{"width": "3em", "height": "3em", "padding": 0, "borderRadius": "3em", "_hover": {"bg": "lightgray"}}}><Image src="/person.png"
+sx={{"width": "3.5em", "height": "3.5em", "padding": 0, "borderRadius": "4em", "_hover": {"bg": "lightgray"}}}><Image src="/person.png"
 sx={{"width": "2em"}}/></Button>
 <Drawer isOpen={state.show_signIn}><DrawerOverlay><DrawerContent><DrawerHeader><HStack justifyContent="right"><Square sx={{"_hover": {"bg": "lightgray"}, "width": "2em", "height": "2em", "borderRadius": "3em"}}><CloseIcon onClick={() => Event([E("state.drawer_state.close_signIn_drawer", {})])}
 sx={{"width": "0.8em", "height": "0.8em"}}/></Square></HStack>
 <Center>{`Sign in`}</Center></DrawerHeader>
-<DrawerBody><VStack><Input type="text"
-placeholder="ID"
-onBlur={(_e) => Event([E("state.sign_in_state.set_user_id", {value:_e.target.value})])}
+<DrawerBody><VStack><Input placeholder="ID"
+value={state.sign_in_state.user_id}
+type="text"
+onChange={(_e) => Event([E("state.sign_in_state.set_user_id", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input type="password"
-placeholder="Password"
-onBlur={(_e) => Event([E("state.sign_in_state.set_password", {value:_e.target.value})])}
+<Input placeholder="Password"
+value={state.sign_in_state.password}
+type="password"
+onChange={(_e) => Event([E("state.sign_in_state.set_password", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
 <Center><HStack><Button onClick={() => Event([E("state.sign_in_state.signIn", {})])}
 sx={{"width": "7em"}}><Text>{`Sign in`}</Text></Button>
@@ -75,29 +77,29 @@ sx={{"width": "0.8em", "height": "0.8em"}}/></Square></HStack>
 <Drawer isOpen={state.show_signUp}><DrawerOverlay><DrawerContent><DrawerHeader><HStack justifyContent="right"><Square sx={{"_hover": {"bg": "lightgray"}, "width": "2em", "height": "2em", "borderRadius": "3em"}}><CloseIcon onClick={() => Event([E("state.drawer_state.close_signUp_drawer", {})])}
 sx={{"width": "0.8em", "height": "0.8em"}}/></Square></HStack>
 <Center>{`Sign up`}</Center></DrawerHeader>
-<VStack><Input type="text"
+<VStack><Input placeholder="ID"
 value={state.sign_in_state.user_id}
-placeholder="ID"
+type="text"
 onChange={(_e) => Event([E("state.sign_in_state.set_user_id", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input type="text"
+<Input placeholder="Username"
 value={state.sign_in_state.username}
-placeholder="Username"
+type="text"
 onChange={(_e) => Event([E("state.sign_in_state.set_username", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input type="text"
+<Input placeholder="email"
 value={state.sign_in_state.email}
-placeholder="email"
+type="text"
 onChange={(_e) => Event([E("state.sign_in_state.set_email", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input type="password"
+<Input placeholder="Password"
 value={state.sign_in_state.password}
-placeholder="Password"
+type="password"
 onChange={(_e) => Event([E("state.sign_in_state.set_password", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input type="password"
+<Input placeholder="Confirm Password"
 value={state.sign_in_state.confirm_password}
-placeholder="Confirm Password"
+type="password"
 onChange={(_e) => Event([E("state.sign_in_state.set_confirm_password", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
 <Center><HStack><Button onClick={() => Event([E("state.sign_in_state.signUp", {})])}
@@ -107,12 +109,12 @@ sx={{"width": "7em"}}><Text>{`Confirm`}</Text></Button>
 sx={{"width": "7em"}}><Text>{`Cancel`}</Text></Button></HStack></Center></VStack>
 <DrawerFooter/></DrawerContent></DrawerOverlay></Drawer></Center></Square></HStack></Box>
 <Spacer/></Flex>
-<Square><Center sx={{"width": "75vw", "height": "135vh", "bg": "yellow", "padding": 10}}><Text>{`Body Area`}</Text></Center></Square>
+<Square><Center sx={{"width": "80vw", "height": "135vh", "bg": "yellow", "padding": 10}}><Text>{`Body Area`}</Text></Center></Square>
 <Square sx={{"width": "100%", "height": "20vh", "bg": "blue"}}><Center><Text sx={{"fontSize": "2em", "color": "yellow"}}>{`Footer Area`}</Text></Center></Square>
 <NextHead><title>{`Pynecone App`}</title>
-<meta content="A Pynecone app."
-name="description"/>
-<meta content="favicon.ico"
-property="og:image"/></NextHead></VStack>
+<meta name="description"
+content="A Pynecone app."/>
+<meta property="og:image"
+content="favicon.ico"/></NextHead></VStack>
 )
 }

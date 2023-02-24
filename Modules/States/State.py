@@ -20,8 +20,17 @@ class state(pc.State):
     show_user: bool = False
     show_signUp : bool = False
 
+    show_navbar : str = "fixed"
+
     def signOut(self):
         self.show_user = False
         self.Auth = False
 
+        return pc.redirect('/')
+
+    def fixNav(self):
+        self.show_navbar = "fixed"
+
+    def nonFixNav(self):
+        self.show_navbar = ""
     

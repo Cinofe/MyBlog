@@ -19,7 +19,7 @@ class MyBlog():
         
 # Add state and page to the app.
 app = pc.App(state=state)
-app.add_page(MyBlog().index)
+app.add_page(MyBlog().index, route="/")
 app.compile()
 
 

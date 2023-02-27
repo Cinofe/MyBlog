@@ -2,6 +2,7 @@
     sign in 관련 모듈
 """
 from Modules.States.SignInState import signInState
+from Modules.States.PostState import postState
 import pynecone as pc
 
 class signInForm:
@@ -11,6 +12,7 @@ class signInForm:
                 value = signInState.user_id,
                 placeholder="ID",
                 on_change=signInState.set_user_id,
+                on_key_down=signInState.idKeyDown,
                 width="15em",
             ),
             pc.input(
@@ -18,6 +20,7 @@ class signInForm:
                 placeholder="Password",
                 type_="password",
                 on_change=signInState.set_password,
+                on_key_down=signInState.pwKeyDown,
                 width="15em",
             ),
             pc.center(
@@ -84,6 +87,42 @@ class signInForm:
                         on_click=signInState.cancelSignUp,
                         width="7em"
                     )
+                )
+            )
+        )
+    
+    def admin():
+        return pc.drawer_body(
+            pc.vstack(
+                ## 모달 창을 띄워서 포스트 작성
+                pc.center(
+                    pc.button(
+                        'Post',
+                        on_click=postState.posting,
+                        width = "15vw"
+                    )
+                )
+            )
+        )
+
+    def footer():
+        return pc.drawer_footer(
+            pc.hstack(
+                pc.link(
+                    'Sign out',
+                    on_click=signInState.signOut,
+                    _hover={"color": "rgb(107,99,246)", "font_size":"1.2em"}
+                ),
+                justify_content='center'
+            )
+        )
+    
+    def user():
+        return pc.drawer_body(
+            pc.center(
+                pc.button(
+                    'Sign out',
+                    on_click=signInState.signOut
                 )
             )
         )

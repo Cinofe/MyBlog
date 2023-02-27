@@ -5,8 +5,7 @@ from Modules.States.State import state
 from Modules.FrameModule.Menu import menu
 import pynecone as pc
 
-
-def navbar():
+def Banner():
     return pc.box(
         pc.hstack(
             pc.hstack(
@@ -34,7 +33,7 @@ class head:
     
     def head(self):
         return pc.flex(
-            navbar(),
+            Banner(),
             pc.spacer(),
             width = str(self.width) + "%",
             height = str(self.height) + "vh",

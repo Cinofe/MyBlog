@@ -59,17 +59,25 @@ class menu():
                     self.CloseIcon(drawerState.close_user_drawer),
                     justify_content = "right"
                 ),
-                pc.center("Signed")
+                pc.center("Guest Signed")
             ),
-            body = pc.drawer_body(
-                pc.center(
-                    pc.button(
-                    'Sign out',
-                    on_click=drawerState.signOut
-                    )
-                )
-            ),
+            # body = signInForm.user(),
+            footer=signInForm.footer(),
             isOpen=drawerState.show_user
+        )
+    
+    def Admin_drawer(self):
+        return drawerFrame.drawer(
+            head = pc.drawer_header(
+                pc.hstack(
+                    self.CloseIcon(drawerState.close_admin_drawer),
+                    justify_content="right"
+                ),
+                pc.center("Admin Signed")
+            ),
+            body = signInForm.admin(),
+            footer=signInForm.footer(),
+            isOpen=drawerState.show_admin_user
         )
     
     ## 위 함수들은 해당 함수가 실행될 때 실행된 상태에서 state의 is open 값에 의해 실행되어야 함
@@ -91,6 +99,7 @@ class menu():
                 self.signIn_drawer(),
                 self.User_drawer(),
                 self.signUp_drawer(),
+                self.Admin_drawer(),
                 padding=self.padding,
             )
         )

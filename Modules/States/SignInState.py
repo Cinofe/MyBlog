@@ -12,22 +12,37 @@ class signInState(state):
     password : str
     confirm_password : str
 
+    def idKeyDown(self,key):
+        if key == "Enter":
+            return self.signIn()
+        elif key == "Backspace":
+            self.user_id = self.user_id[:-1]
+            
+    def pwKeyDown(self,key):
+        if key == "Enter":
+            return self.signIn()
+        elif key == "Backspace":
+            self.password = self.password[:-1]
+            
     def signIn(self):
         with pc.session() as session:
-            if self.user_id != "" and self.password != "":
-                user = session.exec(
-                    Users.select.where(Users.user_id == self.user_id)
-                ).first()
+            if self.user_id == "" or self.password == "":
+                return pc.window_alert("Please fill ID or PW")
+            
+            user = session.exec(
+                Users.select.where(Users.user_id == self.user_id)
+            ).first()
 
-                if user and user.passwd == self.password:
-                    self.Auth = True
-                    
-                    return self.successSign()
-                else :
-                    self.user_id = ""
-                    self.password = ""
-                    return pc.window_alert("ID or PW was wrong")
-    
+            if user == None or user.passwd != self.password:
+                self.user_id = ""
+                self.password = ""
+                return pc.window_alert("ID or PW was wrong")
+
+            self.Auth = True
+            self.admin = user.admin
+            
+            return self.successSign()
+                
     def signUp(self):
         with pc.session() as session:
             if self.user_id == "" or self.username == "" or self.email == "" or self.password == "" or self.confirm_password == "":
@@ -61,17 +76,20 @@ class signInState(state):
     def goSignUp(self):
         self.show_signIn = False
         self.show_user = False
+        self.show_admin_user = False
         self.show_signUp = True
     
     def cancelSignUp(self):
         self.show_signUp = False
         self.show_user = False
+        self.show_admin_user = False
         self.show_signIn = True
 
     def successSign(self):
         self.show_signIn = False
         self.show_signUp = False
         self.show_user = False
+        self.show_admin_user = False
         self.user_id = ""
         self.username = ""
         self.email = ""

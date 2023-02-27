@@ -2,13 +2,13 @@
     Body 구성을 위한 모듈
 """
 import pynecone as pc
-from Modules.States.State import state
+# from Modules.States.State import state
 from .Head import head
 from .Footer import footer
 
 class body:
     def __init__(self):
-        self.width = 80
+        self.width = 65
         self.height = 100
 
     def body(self):
@@ -20,6 +20,4 @@ class body:
                 bg = "yellow",
                 padding = 10,
             ),
-            # on_scroll_up = state.fixNav,
-            # on_scroll_down = state.nonFixNav,
         )

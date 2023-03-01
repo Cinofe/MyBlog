@@ -14,10 +14,12 @@ class MyBlog():
             head().head(),
             body().body(),
             footer().footer(),
+            ## 모달 창을 띄워서 포스트 작성
+            
             width = str(self.width) + "%",
         )
         
 # Add state and page to the app.
 app = pc.App(state=state)
-app.add_page(MyBlog().index, route="/")
+app.add_page(MyBlog().index)
 app.compile()

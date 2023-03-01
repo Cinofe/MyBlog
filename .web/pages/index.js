@@ -51,18 +51,18 @@ sx={{"width": "75px"}}/>
 <Square><Center sx={{"padding": 10}}><Button onClick={() => Event([E("state.drawer_state.show_drawer", {})])}
 sx={{"width": "3.5em", "height": "3.5em", "padding": 0, "borderRadius": "4em", "_hover": {"bg": "lightgray"}}}><Image src="/person.png"
 sx={{"width": "2em"}}/></Button>
-<Drawer isOpen={state.show_signIn}><DrawerOverlay><DrawerContent><DrawerHeader><HStack justifyContent="right"><Square sx={{"_hover": {"bg": "lightgray"}, "width": "2em", "height": "2em", "borderRadius": "3em"}}><CloseIcon onClick={() => Event([E("state.drawer_state.close_signIn_drawer", {})])}
-sx={{"width": "0.8em", "height": "0.8em"}}/></Square></HStack>
+<Drawer isOpen={state.show_signIn}><DrawerOverlay><DrawerContent><DrawerHeader><HStack justifyContent="right"><Square onClick={() => Event([E("state.drawer_state.close_signIn_drawer", {})])}
+sx={{"_hover": {"bg": "lightgray"}, "width": "2em", "height": "2em", "borderRadius": "3em"}}><CloseIcon sx={{"width": "0.8em", "height": "0.8em"}}/></Square></HStack>
 <Center>{`Sign in`}</Center></DrawerHeader>
-<DrawerBody><VStack><Input placeholder="ID"
+<DrawerBody><VStack><Input value={state.sign_in_state.user_id}
+placeholder="ID"
 type="text"
-value={state.sign_in_state.user_id}
 onChange={(_e) => Event([E("state.sign_in_state.set_user_id", {value:_e.target.value})])}
 onKeyDown={(_e) => Event([E("state.sign_in_state.idKeyDown", {key:_e.key})])}
 sx={{"width": "15em"}}/>
-<Input placeholder="Password"
+<Input value={state.sign_in_state.password}
+placeholder="Password"
 type="password"
-value={state.sign_in_state.password}
 onChange={(_e) => Event([E("state.sign_in_state.set_password", {value:_e.target.value})])}
 onKeyDown={(_e) => Event([E("state.sign_in_state.pwKeyDown", {key:_e.key})])}
 sx={{"width": "15em"}}/>
@@ -72,39 +72,39 @@ sx={{"width": "7em"}}><Text>{`Sign in`}</Text></Button>
 <Button onClick={() => Event([E("state.sign_in_state.goSignUp", {})])}
 sx={{"width": "7em"}}><Text>{`Sign up`}</Text></Button></HStack></Center></VStack></DrawerBody>
 <DrawerFooter/></DrawerContent></DrawerOverlay></Drawer>
-<Drawer isOpen={state.show_user}><DrawerOverlay><DrawerContent><DrawerHeader><HStack justifyContent="right"><Square sx={{"_hover": {"bg": "lightgray"}, "width": "2em", "height": "2em", "borderRadius": "3em"}}><CloseIcon onClick={() => Event([E("state.drawer_state.close_user_drawer", {})])}
-sx={{"width": "0.8em", "height": "0.8em"}}/></Square></HStack>
+<Drawer isOpen={state.show_user}><DrawerOverlay><DrawerContent><DrawerHeader><HStack justifyContent="right"><Square onClick={() => Event([E("state.drawer_state.close_user_drawer", {})])}
+sx={{"_hover": {"bg": "lightgray"}, "width": "2em", "height": "2em", "borderRadius": "3em"}}><CloseIcon sx={{"width": "0.8em", "height": "0.8em"}}/></Square></HStack>
 <Center>{`Guest Signed`}</Center></DrawerHeader>
 <DrawerBody/>
-<DrawerFooter><HStack justifyContent="center"><NextLink href="#"
-passHref={true}><Link onClick={() => Event([E("state.signOut", {})])}
+<DrawerFooter><HStack justifyContent="center"><NextLink passHref={true}
+href="#"><Link onClick={() => Event([E("state.signOut", {})])}
 sx={{"_hover": {"color": "rgb(107,99,246)", "fontSize": "1.2em"}}}>{`Sign out`}</Link></NextLink></HStack></DrawerFooter></DrawerContent></DrawerOverlay></Drawer>
-<Drawer isOpen={state.show_signUp}><DrawerOverlay><DrawerContent><DrawerHeader><HStack justifyContent="right"><Square sx={{"_hover": {"bg": "lightgray"}, "width": "2em", "height": "2em", "borderRadius": "3em"}}><CloseIcon onClick={() => Event([E("state.drawer_state.close_signUp_drawer", {})])}
-sx={{"width": "0.8em", "height": "0.8em"}}/></Square></HStack>
+<Drawer isOpen={state.show_signUp}><DrawerOverlay><DrawerContent><DrawerHeader><HStack justifyContent="right"><Square onClick={() => Event([E("state.drawer_state.close_signUp_drawer", {})])}
+sx={{"_hover": {"bg": "lightgray"}, "width": "2em", "height": "2em", "borderRadius": "3em"}}><CloseIcon sx={{"width": "0.8em", "height": "0.8em"}}/></Square></HStack>
 <Center>{`Sign up`}</Center></DrawerHeader>
-<VStack><Input placeholder="ID"
+<VStack><Input value={state.sign_in_state.user_id}
+placeholder="ID"
 type="text"
-value={state.sign_in_state.user_id}
 onChange={(_e) => Event([E("state.sign_in_state.set_user_id", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input placeholder="Username"
+<Input value={state.sign_in_state.username}
+placeholder="Username"
 type="text"
-value={state.sign_in_state.username}
 onChange={(_e) => Event([E("state.sign_in_state.set_username", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input placeholder="email"
+<Input value={state.sign_in_state.email}
+placeholder="email"
 type="text"
-value={state.sign_in_state.email}
 onChange={(_e) => Event([E("state.sign_in_state.set_email", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input placeholder="Password"
+<Input value={state.sign_in_state.password}
+placeholder="Password"
 type="password"
-value={state.sign_in_state.password}
 onChange={(_e) => Event([E("state.sign_in_state.set_password", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input placeholder="Confirm Password"
+<Input value={state.sign_in_state.confirm_password}
+placeholder="Confirm Password"
 type="password"
-value={state.sign_in_state.confirm_password}
 onChange={(_e) => Event([E("state.sign_in_state.set_confirm_password", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
 <Center><HStack><Button onClick={() => Event([E("state.sign_in_state.signUp", {})])}
@@ -113,13 +113,13 @@ sx={{"width": "7em"}}><Text>{`Confirm`}</Text></Button>
 <Button onClick={() => Event([E("state.sign_in_state.cancelSignUp", {})])}
 sx={{"width": "7em"}}><Text>{`Cancel`}</Text></Button></HStack></Center></VStack>
 <DrawerFooter/></DrawerContent></DrawerOverlay></Drawer>
-<Drawer isOpen={state.show_admin_user}><DrawerOverlay><DrawerContent><DrawerHeader><HStack justifyContent="right"><Square sx={{"_hover": {"bg": "lightgray"}, "width": "2em", "height": "2em", "borderRadius": "3em"}}><CloseIcon onClick={() => Event([E("state.drawer_state.close_admin_drawer", {})])}
-sx={{"width": "0.8em", "height": "0.8em"}}/></Square></HStack>
+<Drawer isOpen={state.show_admin_user}><DrawerOverlay><DrawerContent><DrawerHeader><HStack justifyContent="right"><Square onClick={() => Event([E("state.drawer_state.close_admin_drawer", {})])}
+sx={{"_hover": {"bg": "lightgray"}, "width": "2em", "height": "2em", "borderRadius": "3em"}}><CloseIcon sx={{"width": "0.8em", "height": "0.8em"}}/></Square></HStack>
 <Center>{`Admin Signed`}</Center></DrawerHeader>
 <DrawerBody><VStack><Center><Button onClick={() => Event([E("state.post_state.posting", {})])}
 sx={{"width": "15vw"}}>{`Post`}</Button></Center></VStack></DrawerBody>
-<DrawerFooter><HStack justifyContent="center"><NextLink href="#"
-passHref={true}><Link onClick={() => Event([E("state.signOut", {})])}
+<DrawerFooter><HStack justifyContent="center"><NextLink passHref={true}
+href="#"><Link onClick={() => Event([E("state.signOut", {})])}
 sx={{"_hover": {"color": "rgb(107,99,246)", "fontSize": "1.2em"}}}>{`Sign out`}</Link></NextLink></HStack></DrawerFooter></DrawerContent></DrawerOverlay></Drawer></Center></Square></HStack></Box>
 <Spacer/></Flex>
 <Square><Center sx={{"width": "65vw", "height": "135vh", "bg": "yellow", "padding": 10}}><Text>{`Body Area`}</Text></Center></Square>

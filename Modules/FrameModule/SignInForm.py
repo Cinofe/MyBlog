@@ -94,7 +94,6 @@ class signInForm:
     def admin():
         return pc.drawer_body(
             pc.vstack(
-                ## 모달 창을 띄워서 포스트 작성
                 pc.center(
                     pc.button(
                         'Post',

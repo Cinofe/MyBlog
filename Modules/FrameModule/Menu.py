@@ -14,10 +14,10 @@ class menu():
         return pc.square(
             pc.icon(
                 tag="close",
-                on_click=event,
                 width='0.8em',
                 height='0.8em'
             ),
+            on_click=event,
             _hover={"bg": "lightgray"},
             width = '2em',
             height = '2em',
@@ -100,6 +100,7 @@ class menu():
                 self.User_drawer(),
                 self.signUp_drawer(),
                 self.Admin_drawer(),
+                
                 padding=self.padding,
             )
         )

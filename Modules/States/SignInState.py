@@ -3,6 +3,7 @@
 """
 
 from .State import state, Users
+from .UserState import userState
 import pynecone as pc
 
 class signInState(state):
@@ -38,9 +39,16 @@ class signInState(state):
                 self.password = ""
                 return pc.window_alert("ID or PW was wrong")
 
-            self.Auth = True
-            self.admin = user.admin
-            
+            userState.ADMIN = user.admin
+            print(f'userid : {user.user_id}')
+            print(f'ussername : {user.username}')
+            userState.setUserInfo(user.user_id, user.username)
+            userState.set_UID(user.user_id)
+            userState.set_UNAME(user.username)
+
+            print(f'uid : {userState.UID}')
+            print(f'uname : {userState.UNAME}')
+
             return self.successSign()
                 
     def signUp(self):
@@ -69,7 +77,6 @@ class signInState(state):
 
             session.add(new_user)
             session.commit()
-            self.Auth = True
 
             return self.successSign()
 
@@ -90,10 +97,11 @@ class signInState(state):
         self.show_signUp = False
         self.show_user = False
         self.show_admin_user = False
+
+        self.Auth = True
+
         self.user_id = ""
         self.username = ""
         self.email = ""
         self.password = ""
         self.confirm_password = ""
-        
-        return pc.redirect("/")

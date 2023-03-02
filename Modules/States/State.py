@@ -15,7 +15,6 @@ class Users(pc.Model, table=True):
 
 class state(pc.State):
     Auth : bool = False
-    admin : bool = False
 
     show_signIn: bool = False
     show_user: bool = False
@@ -30,10 +29,4 @@ class state(pc.State):
         self.Auth = False
 
         return pc.redirect('/')
-
-    def fixNav(self):
-        self.show_navbar = "fixed"
-
-    def nonFixNav(self):
-        self.show_navbar = ""
     

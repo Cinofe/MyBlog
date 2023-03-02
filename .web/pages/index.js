@@ -9,7 +9,7 @@ import NextHead from "next/head"
 
 const EVENT = "ws://localhost:8000/event"
 export default function Component() {
-const [state, setState] = useState({"Auth": false, "admin": false, "drawer_state": {}, "post_state": {}, "show_admin_user": false, "show_navbar": "fixed", "show_signIn": false, "show_signUp": false, "show_user": false, "sign_in_state": {"confirm_password": "", "email": "", "password": "", "user_id": "", "username": ""}, "events": [{"name": "state.hydrate"}]})
+const [state, setState] = useState({"Auth": false, "drawer_state": {}, "post_state": {}, "show_admin_user": false, "show_navbar": "fixed", "show_signIn": false, "show_signUp": false, "show_user": false, "sign_in_state": {"confirm_password": "", "email": "", "password": "", "user_id": "", "username": ""}, "user_state": {"ADMIN": false, "UID": "", "UNAME": ""}, "events": [{"name": "state.hydrate"}]})
 const [result, setResult] = useState({"state": null, "events": [], "processing": false})
 const router = useRouter()
 const socket = useRef(null)
@@ -54,15 +54,15 @@ sx={{"width": "2em"}}/></Button>
 <Drawer isOpen={state.show_signIn}><DrawerOverlay><DrawerContent><DrawerHeader><HStack justifyContent="right"><Square onClick={() => Event([E("state.drawer_state.close_signIn_drawer", {})])}
 sx={{"_hover": {"bg": "lightgray"}, "width": "2em", "height": "2em", "borderRadius": "3em"}}><CloseIcon sx={{"width": "0.8em", "height": "0.8em"}}/></Square></HStack>
 <Center>{`Sign in`}</Center></DrawerHeader>
-<DrawerBody><VStack><Input value={state.sign_in_state.user_id}
+<DrawerBody><VStack><Input type="text"
 placeholder="ID"
-type="text"
+value={state.sign_in_state.user_id}
 onChange={(_e) => Event([E("state.sign_in_state.set_user_id", {value:_e.target.value})])}
 onKeyDown={(_e) => Event([E("state.sign_in_state.idKeyDown", {key:_e.key})])}
 sx={{"width": "15em"}}/>
-<Input value={state.sign_in_state.password}
+<Input type="password"
 placeholder="Password"
-type="password"
+value={state.sign_in_state.password}
 onChange={(_e) => Event([E("state.sign_in_state.set_password", {value:_e.target.value})])}
 onKeyDown={(_e) => Event([E("state.sign_in_state.pwKeyDown", {key:_e.key})])}
 sx={{"width": "15em"}}/>
@@ -76,35 +76,35 @@ sx={{"width": "7em"}}><Text>{`Sign up`}</Text></Button></HStack></Center></VStac
 sx={{"_hover": {"bg": "lightgray"}, "width": "2em", "height": "2em", "borderRadius": "3em"}}><CloseIcon sx={{"width": "0.8em", "height": "0.8em"}}/></Square></HStack>
 <Center>{`Guest Signed`}</Center></DrawerHeader>
 <DrawerBody/>
-<DrawerFooter><HStack justifyContent="center"><NextLink passHref={true}
-href="#"><Link onClick={() => Event([E("state.signOut", {})])}
+<DrawerFooter><HStack justifyContent="center"><NextLink href="#"
+passHref={true}><Link onClick={() => Event([E("state.signOut", {})])}
 sx={{"_hover": {"color": "rgb(107,99,246)", "fontSize": "1.2em"}}}>{`Sign out`}</Link></NextLink></HStack></DrawerFooter></DrawerContent></DrawerOverlay></Drawer>
 <Drawer isOpen={state.show_signUp}><DrawerOverlay><DrawerContent><DrawerHeader><HStack justifyContent="right"><Square onClick={() => Event([E("state.drawer_state.close_signUp_drawer", {})])}
 sx={{"_hover": {"bg": "lightgray"}, "width": "2em", "height": "2em", "borderRadius": "3em"}}><CloseIcon sx={{"width": "0.8em", "height": "0.8em"}}/></Square></HStack>
 <Center>{`Sign up`}</Center></DrawerHeader>
-<VStack><Input value={state.sign_in_state.user_id}
+<VStack><Input type="text"
 placeholder="ID"
-type="text"
+value={state.sign_in_state.user_id}
 onChange={(_e) => Event([E("state.sign_in_state.set_user_id", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input value={state.sign_in_state.username}
+<Input type="text"
 placeholder="Username"
-type="text"
+value={state.sign_in_state.username}
 onChange={(_e) => Event([E("state.sign_in_state.set_username", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input value={state.sign_in_state.email}
+<Input type="text"
 placeholder="email"
-type="text"
+value={state.sign_in_state.email}
 onChange={(_e) => Event([E("state.sign_in_state.set_email", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input value={state.sign_in_state.password}
+<Input type="password"
 placeholder="Password"
-type="password"
+value={state.sign_in_state.password}
 onChange={(_e) => Event([E("state.sign_in_state.set_password", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
-<Input value={state.sign_in_state.confirm_password}
+<Input type="password"
 placeholder="Confirm Password"
-type="password"
+value={state.sign_in_state.confirm_password}
 onChange={(_e) => Event([E("state.sign_in_state.set_confirm_password", {value:_e.target.value})])}
 sx={{"width": "15em"}}/>
 <Center><HStack><Button onClick={() => Event([E("state.sign_in_state.signUp", {})])}
@@ -118,15 +118,15 @@ sx={{"_hover": {"bg": "lightgray"}, "width": "2em", "height": "2em", "borderRadi
 <Center>{`Admin Signed`}</Center></DrawerHeader>
 <DrawerBody><VStack><Center><Button onClick={() => Event([E("state.post_state.posting", {})])}
 sx={{"width": "15vw"}}>{`Post`}</Button></Center></VStack></DrawerBody>
-<DrawerFooter><HStack justifyContent="center"><NextLink passHref={true}
-href="#"><Link onClick={() => Event([E("state.signOut", {})])}
+<DrawerFooter><HStack justifyContent="center"><NextLink href="#"
+passHref={true}><Link onClick={() => Event([E("state.signOut", {})])}
 sx={{"_hover": {"color": "rgb(107,99,246)", "fontSize": "1.2em"}}}>{`Sign out`}</Link></NextLink></HStack></DrawerFooter></DrawerContent></DrawerOverlay></Drawer></Center></Square></HStack></Box>
 <Spacer/></Flex>
 <Square><Center sx={{"width": "65vw", "height": "135vh", "bg": "yellow", "padding": 10}}><Text>{`Body Area`}</Text></Center></Square>
 <Square sx={{"width": "100%", "height": "20vh", "bg": "blue"}}><Center><Text sx={{"fontSize": "2em", "color": "yellow"}}>{`Footer Area`}</Text></Center></Square>
 <NextHead><title>{`Pynecone App`}</title>
-<meta content="A Pynecone app."
-name="description"/>
+<meta name="description"
+content="A Pynecone app."/>
 <meta property="og:image"
 content="favicon.ico"/></NextHead></VStack>
 )

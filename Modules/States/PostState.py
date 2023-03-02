@@ -1,5 +1,5 @@
 
-from Modules.States.State import state
+from .State import state
 import pynecone as pc
 
 class postState(state):

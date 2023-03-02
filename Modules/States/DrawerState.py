@@ -2,15 +2,15 @@
     drawer 구성을 위한 State 모듈
 """
 
-from .State import state, Users
-import pynecone as pc
+from .State import state
+from .UserState import userState
 
 class drawerState(state):
 
     def show_drawer(self):
         if self.Auth:
             self.show_signIn = False
-            if self.admin:
+            if userState.ADMIN:
                 self.show_admin_user = True
             else:
                 self.show_user = True

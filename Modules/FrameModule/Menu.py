@@ -3,7 +3,8 @@
 """
 import pynecone as pc
 from Modules.States.DrawerState import drawerState
-from Modules.FrameModule.DrawerFrame import drawerFrame
+from Modules.States.UserState import userState
+from .DrawerFrame import drawerFrame
 from .SignInForm import signInForm
 
 class menu():
@@ -59,7 +60,9 @@ class menu():
                     self.CloseIcon(drawerState.close_user_drawer),
                     justify_content = "right"
                 ),
-                pc.center("Guest Signed")
+                pc.center(
+                    pc.heading("Hi! "+ drawerState.UNAME)
+                )
             ),
             # body = signInForm.user(),
             footer=signInForm.footer(),

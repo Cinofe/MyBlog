@@ -21,8 +21,6 @@ class state(pc.State):
     show_admin_user: bool = False
     show_signUp : bool = False
 
-    show_navbar : str = "fixed"
-
     def signOut(self):
         self.show_user = False
         self.show_admin_user = False

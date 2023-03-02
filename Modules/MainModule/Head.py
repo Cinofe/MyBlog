@@ -21,7 +21,7 @@ def Banner():
             padding_x="2em",
             bg="rgba(255,255,255, 0.75)",
         ),
-        position=state.show_navbar,
+        position="Fixed",
         width="100%",
         top="0px",
     )

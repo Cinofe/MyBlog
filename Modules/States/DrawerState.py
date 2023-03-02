@@ -6,6 +6,7 @@ from .State import state
 from .UserState import userState
 
 class drawerState(state):
+    UNAME : str
 
     def show_drawer(self):
         if self.Auth:
@@ -14,6 +15,7 @@ class drawerState(state):
                 self.show_admin_user = True
             else:
                 self.show_user = True
+                self.UNAME = userState.UNAME
         else:
             self.show_signIn = True
             self.show_user = False

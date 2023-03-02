@@ -40,14 +40,8 @@ class signInState(state):
                 return pc.window_alert("ID or PW was wrong")
 
             userState.ADMIN = user.admin
-            print(f'userid : {user.user_id}')
-            print(f'ussername : {user.username}')
-            userState.setUserInfo(user.user_id, user.username)
-            userState.set_UID(user.user_id)
-            userState.set_UNAME(user.username)
-
-            print(f'uid : {userState.UID}')
-            print(f'uname : {userState.UNAME}')
+            userState.UID = user.user_id
+            userState.UNAME = user.username
 
             return self.successSign()
                 
